@@ -39,3 +39,31 @@
 - **libs/chin-common-util**
 - **libs/scheduleDemo-parent-lib**: 統一管理所有模組的依賴版本 (Dependency Management)。
 
+### 資料庫準備
+請先建立名為 `schedule_demo` 的 Schema，並執行以下 SQL 建立排程設定表與執行紀錄表：
+
+```sql
+CREATE DATABASE IF NOT EXISTS `schedule_demo`;
+USE `schedule_demo`;
+
+-- 排程任務設定表
+CREATE TABLE `scheduled_task_config` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `task_name` varchar(100) NOT NULL UNIQUE,
+  `cron_expression` varchar(100) NOT NULL,
+  `frequency_type` varchar(50) DEFAULT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `description` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- 任務執行紀錄表 (用於 BaseTask 紀錄執行狀態)
+CREATE TABLE IF NOT EXISTS `task_execution_log` (
+  `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+  `task_name` VARCHAR(100) NOT NULL,
+  `status` VARCHAR(20) NOT NULL,
+  `start_time` DATETIME NOT NULL,
+  `end_time` DATETIME DEFAULT NULL,
+  `message` TEXT DEFAULT NULL
+);
+
