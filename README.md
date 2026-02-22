@@ -1,6 +1,6 @@
 # scheduleDemo 動態排程管理系統 
 
-這是一個基於 **Spring Boot 3.2+** 開發的輕量級後端管理系統。本專案核心目標是提供一套具備**可擴展性**與**即時性**的排程解決方案，解決傳統 `@Scheduled` 註解無法在不重啟服務的情況下動態調整頻率的痛點。
+這是一個基於 **Spring Boot 3.5.3+** 開發的輕量級後端管理系統。本專案核心目標是提供一套具備**可擴展性**與**即時性**的排程解決方案，解決傳統 `@Scheduled` 註解無法在不重啟服務的情況下動態調整頻率的痛點。
 
 ## 核心特色
 - **動態管理**：透過 RESTful API 即時更新資料庫中的 Cron 表達式，並立即重新註冊排程。
@@ -10,9 +10,9 @@
 - **高度解耦**：採用模板模式 (Template Method Pattern)，新增任務僅需繼承 `BaseTask` 即可自動納入管理。
 
 ## 技術棧
-- **Framework**: Java 17 / Spring Boot 3.2.x
+- **Framework**: Java 17 / Spring Boot 3.5.3
 - **ORM**: Spring Data JPA / Hibernate
-- **Database**: MySQL 8.0
+- **Database**: MySQL 8.0.33
 - **API Doc**: Knife4j (Swagger) / OpenAPI 3
 - **Tools**: Lombok, Maven, Git
 
