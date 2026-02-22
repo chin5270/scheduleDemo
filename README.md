@@ -20,7 +20,7 @@
 
 ## 專案結構 (Multi-module Architecture)
 
-本專案採用多模組架構設計，以實現高度解耦與模組化重用：
+本專案採用多模組架構設計：
 
 ### 核心模組 (Apps & Builders)
 - **apps/scheduleDemo-api-www**: 專案入口啟動層，包含 Spring Boot 啟動類與全域設定。
