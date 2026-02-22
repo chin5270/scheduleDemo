@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.web.cc</groupId>
+    <artifactId>scheduleDemo-parent-lib</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+		<!-- Java Compiler Version -->
+		<java.version>17</java.version>
+        <!-- 設定專案原始碼與編譯的預設文字編碼 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Spring Boot -->
+        <spring-boot-dependencies.version>3.5.3</spring-boot-dependencies.version>
+        <spring-boot-security.crypto.version>6.2.5</spring-boot-security.crypto.version>
+        <!-- Lombok -->
+        <lombok.version>1.18.34</lombok.version>
+        <!-- mysql Database Drive -->
+        <mysql.version>8.0.33</mysql.version>
+        <!-- jackson-databind -->
+        <jackson-databind.version>2.14.2</jackson-databind.version>
+        <!-- Commons util -->
+        <commons-lang3.version>3.9</commons-lang3.version>
+        <commons-compress.version>1.21</commons-compress.version>
+        <commons-fileupload.version>1.5</commons-fileupload.version>
+        <commons-net.version>3.9.0</commons-net.version>
+        <commons-text.version>1.10.0</commons-text.version>
+        <commons-io.version>2.7</commons-io.version>
+        <commons-codec.version>1.13</commons-codec.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
+        <!-- commons-validator -->
+		<commons-validator.version>1.9.0</commons-validator.version>
+        <!-- Google Guava -->
+		<com.google.guava.version>30.1.1-jre</com.google.guava.version>
+		<!-- jakarta.xml.bind-api -->
+		<jakarta.xml.bind-api.version>4.0.2</jakarta.xml.bind-api.version>
+		<!-- jcom.google.code.gson -->
+		<com.google.code.gson.version>2.10.1</com.google.code.gson.version>
+		<!-- Jasypt 設定檔加密工具 -->
+		<jasypt-spring-boot-starter.version>3.0.5</jasypt-spring-boot-starter.version>
+		<!-- Swagger -->
+		<knife4j-openapi3-jakarta-spring-boot-starter.version>4.4.0</knife4j-openapi3-jakarta-spring-boot-starter.version>
+		<springdoc-openapi-starter-webmvc-ui.version>2.2.0</springdoc-openapi-starter-webmvc-ui.version>
+		<!-- JWT 加密工具 -->
+		<jjwt.version>0.12.3</jjwt.version>
+    </properties>
+    <!-- 父專案的 <dependencyManagement> 中定義了子模組所需的依賴和版本，子模組引用這些依賴時，不需要重複定義版本號。 -->
+    <dependencyManagement>
+        <dependencies>
+			<!-- 正確引入 Spring Boot 版本控制 BOM -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring-boot-dependencies.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<!-- 固定使用log4j2, 排除Logback -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter</artifactId>
+				<version>${spring-boot-dependencies.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-starter-logging</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot-dependencies.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-validation</artifactId>
+                <version>${spring-boot-dependencies.version}</version>
+            </dependency>
+             <!-- spring boot data JPA -->
+	        <dependency>
+	            <groupId>org.springframework.boot</groupId>
+	            <artifactId>spring-boot-starter-data-jpa</artifactId>
+	            <version>${spring-boot-dependencies.version}</version>
+	        </dependency>
+	         <!-- spring boot security -->
+	        <dependency>
+			    <groupId>org.springframework.boot</groupId>
+			    <artifactId>spring-boot-starter-security</artifactId>
+			    <version>${spring-boot-dependencies.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>org.springframework.security</groupId>
+			    <artifactId>spring-security-crypto</artifactId>
+			    <version>${spring-boot-security.crypto.version}</version>
+			</dependency>
+
+            <!-- test -->
+            <dependency>
+			    <groupId>org.springframework.boot</groupId>
+			    <artifactId>spring-boot-starter-test</artifactId>
+			    <version>${spring-boot-dependencies.version}</version>
+			    <scope>test</scope>
+			</dependency>
+            <!-- SQL Database Drive -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jdbc</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <!-- jackson-databind：處理 JSON 與 Java 對象的轉換 -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson-databind.version}</version>
+            </dependency>
+			<!-- Java 工具擴充: 字串處理、陣列工具、物件工具 -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${commons-lang3.version}</version>
+			</dependency>
+			<!-- 壓縮 / 解壓縮: ZIP、TAR、GZ 等格式檔案處理 -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-compress</artifactId>
+				<version>${commons-compress.version}</version>
+			</dependency>
+			<!-- HTTP 檔案上傳處理: 表單上傳 multipart request 處理 -->
+			<dependency>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+				<version>${commons-fileupload.version}</version>
+			</dependency>
+			<!-- 網路協定工具: FTP、Telnet、SMTP 通訊處理 -->
+			<dependency>
+				<groupId>commons-net</groupId>
+				<artifactId>commons-net</artifactId>
+				<version>${commons-net.version}</version>
+			</dependency>
+			<!-- 檔案與 IO 操作工具:	讀/寫檔案、複製、刪除等 -->
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons-io.version}</version>
+			</dependency>
+			<!-- 字串與文字處理工具:	模板字串、隨機字串、相似度等 -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-text</artifactId>
+				<version>${commons-text.version}</version>
+			</dependency>
+			 <!-- 編碼與解: Base64 / Hex / MD5 / SHA-1 / SHA-256 等 -->
+       		<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>${commons-codec.version}</version>
+			</dependency>
+			<!-- Apache 擴充集合工具：支援更進階的 Map / List / Set 操作，例如 MultiValuedMap、Bag、BidiMap 等 -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-collections4</artifactId>
+				<version>${commons-collections4.version}</version>
+			</dependency>
+			<!-- Lombok： 簡化 Java 程式碼，提供自動產生 Getter/Setter、@Slf4j 等註解 -->
+			<dependency>
+	            <groupId>org.projectlombok</groupId>
+	            <artifactId>lombok</artifactId>
+	            <version>${lombok.version}</version>
+	            <scope>provided</scope>
+       		 </dependency>
+      	   <!-- Guava：Google Java 工具庫，提供集合、字串、緩存等實用功能 -->
+      	    <dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${com.google.guava.version}</version>
+			</dependency>
+			<!-- JAXB API：Java 與 XML 互轉的標準接口 -->
+       		<dependency>
+			    <groupId>jakarta.xml.bind</groupId>
+			    <artifactId>jakarta.xml.bind-api</artifactId>
+			    <version>${jakarta.xml.bind-api.version}</version>
+		  	</dependency>
+		  	<!-- Gson：JSON 與 Java 物件轉換工具 -->
+		  	<dependency>
+			    <groupId>com.google.code.gson</groupId>
+			    <artifactId>gson</artifactId>
+			    <version>${com.google.code.gson.version}</version>
+			</dependency>
+			<!-- Jasypt：用於在 Spring Boot 專案中對設定檔中的敏感資訊 進行加密與自動解密 -->
+			<dependency>
+				<groupId>com.github.ulisesbocchio</groupId>
+				<artifactId>jasypt-spring-boot-starter</artifactId>
+				<version>${jasypt-spring-boot-starter.version}</version>
+			</dependency>
+			<!-- Commons Validator：提供常見輸入格式的驗證工具，例如 Email、URL、信用卡號等 -->
+			<dependency>
+			    <groupId>commons-validator</groupId>
+			    <artifactId>commons-validator</artifactId>
+			    <version>${commons-validator.version}</version>
+			</dependency>
+			<!-- swagger -->
+			<dependency>
+			    <groupId>com.github.xiaoymin</groupId>
+			    <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+			    <version>${knife4j-openapi3-jakarta-spring-boot-starter.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>org.springdoc</groupId>
+			    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			    <version>${springdoc-openapi-starter-webmvc-ui.version}</version>
+			</dependency>
+			<!-- JWT 加密工具 -->
+	        <dependency>
+			    <groupId>io.jsonwebtoken</groupId>
+			    <artifactId>jjwt-api</artifactId>
+			    <version>${jjwt.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>io.jsonwebtoken</groupId>
+			    <artifactId>jjwt-impl</artifactId>
+			    <version>${jjwt.version}</version>
+			    <scope>runtime</scope>
+			</dependency>
+			<dependency>
+			    <groupId>io.jsonwebtoken</groupId>
+			    <artifactId>jjwt-jackson</artifactId>
+			    <version>${jjwt.version}</version>
+			    <scope>runtime</scope>
+			</dependency>
+        </dependencies>
+    </dependencyManagement>
+    <dependencies>
+		<!-- 使用log4j2 -->
+		<!-- 引入 Spring Boot 與 Log4j2 的整合套件。
+		     這個 starter 會自動移除預設的 Logback，改用 Log4j2 作為日誌系統。
+		     若你想使用 Log4j2 取代 Spring Boot 預設的 Logback，就需要加上這個依賴。 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+		
+		<!-- lombok -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <scope>provided</scope>
+		 </dependency>
+		
+		<!-- test -->
+		<dependency>
+	      <groupId>org.springframework.boot</groupId>
+	      <artifactId>spring-boot-starter-test</artifactId>
+	      <scope>test</scope>
+	    </dependency>
+	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring-boot-dependencies.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.2</version>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
