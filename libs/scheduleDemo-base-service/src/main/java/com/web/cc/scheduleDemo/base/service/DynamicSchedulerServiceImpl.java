@@ -7,7 +7,6 @@ import java.util.concurrent.ScheduledFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Service;
@@ -38,19 +37,13 @@ public class DynamicSchedulerServiceImpl implements DynamicSchedulerService {
 	@Autowired
 	private ApplicationContext applicationContext;
 
-    private TaskScheduler taskScheduler;
+	@Autowired
+    private ThreadPoolTaskScheduler taskScheduler;
     
     private final Map<String, ScheduledFuture<?>> scheduledFutures = new ConcurrentHashMap<>();
 
     @PostConstruct
     public void init() {
-        // 建立排程執行緒池
-        ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
-        scheduler.setPoolSize(5);
-        scheduler.setThreadNamePrefix("schedule-task-");
-        scheduler.initialize();
-        this.taskScheduler = scheduler;
-
         // 載入所有啟用的排程任務
         registerAllTasks();
     }
