@@ -26,7 +26,7 @@
 - **apps/scheduleDemo-api-www**: 專案入口啟動層，包含 Spring Boot 啟動類與全域設定。
 - **builders/scheduleDemo-api-www-builder**: 負責專案建構與打包配置。
 
-### 務邏輯模組 (Libs)
+### 業務邏輯模組 (Libs)
 - **libs/scheduleDemo-api-rest**: Controller 層，定義排程管理的 RESTful API 接口。
 - **libs/scheduleDemo-base-service**: Service 層，實作動態排程註冊與任務調度核心邏輯。
 - **libs/scheduleDemo-base-repos**: Persistence 層，包含 JPA Entity 與資料庫存取接口 (DAO)。
