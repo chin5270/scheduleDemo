@@ -4,6 +4,7 @@
 
 ## 核心特色
 - **動態管理**：透過 RESTful API 即時更新資料庫中的 Cron 表達式，並立即重新註冊排程。
+- **結構化 Cron 構建**：引入 CronExpressionBuilder，使用者僅需選擇頻率（年/月/日/時/分）與時間，系統自動組裝符合標準的 6 位數 Cron 表達式。
 - **異步執行緒池**：自定義 `ThreadPoolTaskScheduler`，確保多個排程任務異步執行，互不阻塞。
 - **視覺化監控**：整合 **Knife4j (Swagger)**，提供直觀的 API 調試與任務執行狀況監控。
 - **完善日誌**：詳實記錄每次任務的執行狀態（RUNNING, SUCCESS, FAILURE）、執行耗時。
@@ -14,7 +15,7 @@
 - **ORM**: Spring Data JPA / Hibernate
 - **Database**: MySQL 8.0.33
 - **API Doc**: Knife4j (Swagger) / OpenAPI 3
-- **Tools**: Lombok, Maven, Git
+- **Tools**: Lombok, Maven, Git, cron-utils
 
 ---
 
