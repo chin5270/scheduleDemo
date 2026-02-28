@@ -9,12 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
+import com.web.cc.chin.common.util.CronExpressionBuilder;
+import com.web.cc.chin.common.util.core.FrequencyType;
 import com.web.cc.scheduleDemo.base.repos.dao.ScheduledTaskConfigRepository;
 import com.web.cc.scheduleDemo.base.repos.dao.TaskExecutionLogRepository;
 import com.web.cc.scheduleDemo.base.repos.entity.ScheduledTaskConfigEntity;
 import com.web.cc.scheduleDemo.base.repos.entity.TaskExecutionLogEntity;
 import com.web.cc.sheduleDemo.base.core.DynamicSchedulerService;
-import com.web.cc.sheduleDemo.base.core.FrequencyType;
 import com.web.cc.sheduleDemo.base.core.ScheduleConfigService;
 import com.web.cc.sheduleDemo.base.core.ScheduledTaskConfig;
 import com.web.cc.sheduleDemo.base.core.TaskExecutionLog;
@@ -96,7 +97,11 @@ public class ScheduleConfigServiceImpl implements ScheduleConfigService {
      *
      * @param taskName       任務名稱
      * @param frequencyType  排程頻率類
-     * @param cronExpression 排程表達式
+     * @param month          月份
+     * @param dayOfMonth     日期
+     * @param hour           小時
+     * @param minute         分鐘
+     * @param interval       間隔分鐘數
      * @param isActive       是否啟用
      * @param description    說明
      * @return 
@@ -104,7 +109,11 @@ public class ScheduleConfigServiceImpl implements ScheduleConfigService {
     public ScheduledTaskConfig createConfig(
     		@NotBlank String taskName, 
     		@NotNull FrequencyType frequencyType,
-    		@NotBlank String cronExpression,
+    		Integer month,
+    		Integer dayOfMonth,
+    		Integer hour,
+    		Integer minute,
+    		Integer interval,
     		@NotNull Boolean isActive,
     		@NotBlank String description) {
     	
@@ -112,6 +121,15 @@ public class ScheduleConfigServiceImpl implements ScheduleConfigService {
         if (configRepository.findByTaskName(taskName).isPresent()) {
             throw new IllegalArgumentException("排程任務 [" + taskName + "] 已存在");
         }
+        
+        // 產生 cron 表達式
+        String cronExpression = CronExpressionBuilder.buildCronExpression(
+        		frequencyType,
+        		month,
+        		dayOfMonth,
+        		hour,
+        		minute,
+        		interval);
         
         ScheduledTaskConfigEntity entity = new ScheduledTaskConfigEntity();
         entity.setTaskName(taskName);
@@ -137,7 +155,11 @@ public class ScheduleConfigServiceImpl implements ScheduleConfigService {
      *
      * @param taskName       任務名稱
      * @param frequencyType  排程頻率類型，可為 null
-     * @param cronExpression 排程表達式，可為 null
+     * @param month          月份
+     * @param dayOfMonth     日期
+     * @param hour           小時
+     * @param minute         分鐘
+     * @param interval       間隔分鐘數
      * @param isActive       是否啟用，可為 null
      * @param description    說明，可為 null
      * @return 更新後的設定，若找不到則丟例外
@@ -145,7 +167,11 @@ public class ScheduleConfigServiceImpl implements ScheduleConfigService {
     public ScheduledTaskConfig updateConfig(
             String taskName,
             FrequencyType frequencyType,
-            String cronExpression,
+            Integer month,
+    		Integer dayOfMonth,
+    		Integer hour,
+    		Integer minute,
+    		Integer interval,
             Boolean isActive,
             String description) {
 
@@ -154,10 +180,17 @@ public class ScheduleConfigServiceImpl implements ScheduleConfigService {
 
         if (frequencyType != null) {
             config.setFrequencyType(frequencyType);
-        }
-        if (cronExpression != null) {
+            // 產生 cron 表達式
+            String cronExpression = CronExpressionBuilder.buildCronExpression(
+            		frequencyType,
+            		month,
+            		dayOfMonth,
+            		hour,
+            		minute,
+            		interval);
             config.setCronExpression(cronExpression);
         }
+       
         if (isActive != null) {
             config.setIsActive(isActive);
         }

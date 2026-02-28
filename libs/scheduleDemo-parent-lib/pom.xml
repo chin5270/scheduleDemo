@@ -46,6 +46,8 @@
 		<springdoc-openapi-starter-webmvc-ui.version>2.2.0</springdoc-openapi-starter-webmvc-ui.version>
 		<!-- JWT 加密工具 -->
 		<jjwt.version>0.12.3</jjwt.version>
+		<!-- Cron Utils -->
+		<cronutils.version>9.2.1</cronutils.version>
     </properties>
     <!-- 父專案的 <dependencyManagement> 中定義了子模組所需的依賴和版本，子模組引用這些依賴時，不需要重複定義版本號。 -->
     <dependencyManagement>
@@ -235,6 +237,12 @@
 			    <version>${jjwt.version}</version>
 			    <scope>runtime</scope>
 			</dependency>
+			 <!-- Cron Utils -->
+	        <dependency>
+	            <groupId>com.cronutils</groupId>
+	            <artifactId>cron-utils</artifactId>
+	            <version>${cronutils.version}</version>
+	        </dependency>
         </dependencies>
     </dependencyManagement>
     <dependencies>

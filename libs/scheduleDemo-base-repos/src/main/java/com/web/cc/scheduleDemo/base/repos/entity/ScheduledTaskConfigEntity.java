@@ -1,6 +1,6 @@
 package com.web.cc.scheduleDemo.base.repos.entity;
 
-import com.web.cc.sheduleDemo.base.core.FrequencyType;
+import com.web.cc.chin.common.util.core.FrequencyType;
 import com.web.cc.sheduleDemo.base.core.ScheduledTaskConfig;
 
 import jakarta.persistence.Column;

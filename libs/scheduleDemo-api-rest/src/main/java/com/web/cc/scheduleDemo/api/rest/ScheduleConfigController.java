@@ -70,7 +70,11 @@ public class ScheduleConfigController {
             ScheduledTaskConfig config = scheduleConfigService.createConfig(
             		request.getTaskName(),
             		request.getFrequencyType(),
-            		request.getCronExpression(),
+            		request.getMonth(),
+            		request.getDayOfMonth(),
+            		request.getHour(),
+            		request.getMinute(),
+            		request.getInterval(),
             		request.getIsActive(),
             		request.getDescription());
             return ResponseEntity.status(201).body(config);
@@ -89,7 +93,11 @@ public class ScheduleConfigController {
         ScheduledTaskConfig updatedConfig = scheduleConfigService.updateConfig(
                 request.getTaskName(),
                 request.getFrequencyType(),
-                request.getCronExpression(),
+            	request.getMonth(),
+        		request.getDayOfMonth(),
+        		request.getHour(),
+        		request.getMinute(),
+        		request.getInterval(),
                 request.getIsActive(),    
                 request.getDescription()   
         );

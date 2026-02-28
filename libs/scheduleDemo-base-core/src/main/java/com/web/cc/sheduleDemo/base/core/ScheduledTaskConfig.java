@@ -1,5 +1,7 @@
 package com.web.cc.sheduleDemo.base.core;
 
+import com.web.cc.chin.common.util.core.FrequencyType;
+
 /**
  * 排程任務設定介面
  */

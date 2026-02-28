@@ -80,7 +80,7 @@ public abstract class BaseTask {
     }
 
     /**
-     * 子類別必須實作的業務邏輯
+     * 執行排程任務的核心業務邏輯
      *
      * @return 執行結果摘要訊息
      */
