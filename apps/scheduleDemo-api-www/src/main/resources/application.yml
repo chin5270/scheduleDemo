@@ -1,4 +1,6 @@
-server: 
+server:
+  port: 8080
   tomcat:
     uri-encoding: UTF-8
-  port: 8080
+  servlet:
+    context-path: /scheduleDemo-api-www 
